@@ -1,0 +1,110 @@
+{
+  "schema_version": "supplytwin/v1",
+  "scenario": "Global manufacturer supplier-delay and inventory optimization digital twin",
+  "evidence_level": "deterministic-synthetic-digital-twin",
+  "forecasting": {
+    "winner": "seasonal-naive",
+    "seasonal_naive_mae": 62.5,
+    "moving_average_mae": 80,
+    "next_period_units": 1190,
+    "complex_model_must_beat_baseline": true
+  },
+  "disruption": {
+    "material": "chip-x7",
+    "delay_days": 14,
+    "affected_products": [
+      "edge-gateway",
+      "industrial-controller"
+    ]
+  },
+  "inventory": {
+    "modeled_revenue_at_risk_usd": 819000.0,
+    "modeled_contribution_at_risk_usd": 338580.0,
+    "modeled_penalties_at_risk_usd": 40950.0,
+    "annual_inventory_carrying_cost_usd": 210816.0
+  },
+  "actions": [
+    {
+      "name": "do-nothing",
+      "incremental_cost_usd": 0,
+      "cash_required_usd": 0,
+      "service_level_pct": 62,
+      "exposure_reduction_pct": 0,
+      "quality_approved": true,
+      "modeled_loss_avoided_usd": 0.0,
+      "modeled_net_value_usd": 0.0,
+      "violations": [
+        "service-level floor violated"
+      ]
+    },
+    {
+      "name": "expedite-primary-supplier",
+      "incremental_cost_usd": 85000,
+      "cash_required_usd": 160000,
+      "service_level_pct": 96,
+      "exposure_reduction_pct": 0.82,
+      "quality_approved": true,
+      "modeled_loss_avoided_usd": 311214.6,
+      "modeled_net_value_usd": 226214.6,
+      "violations": []
+    },
+    {
+      "name": "approved-alternate-plus-reallocation",
+      "incremental_cost_usd": 62000,
+      "cash_required_usd": 210000,
+      "service_level_pct": 97,
+      "exposure_reduction_pct": 0.9,
+      "quality_approved": true,
+      "modeled_loss_avoided_usd": 341577.0,
+      "modeled_net_value_usd": 279577.0,
+      "violations": []
+    },
+    {
+      "name": "unapproved-component-substitution",
+      "incremental_cost_usd": 22000,
+      "cash_required_usd": 100000,
+      "service_level_pct": 99,
+      "exposure_reduction_pct": 0.96,
+      "quality_approved": false,
+      "modeled_loss_avoided_usd": 364348.8,
+      "modeled_net_value_usd": 342348.8,
+      "violations": [
+        "quality approval absent"
+      ]
+    }
+  ],
+  "selected_action": {
+    "name": "approved-alternate-plus-reallocation",
+    "incremental_cost_usd": 62000,
+    "cash_required_usd": 210000,
+    "service_level_pct": 97,
+    "exposure_reduction_pct": 0.9,
+    "quality_approved": true,
+    "modeled_loss_avoided_usd": 341577.0,
+    "modeled_net_value_usd": 279577.0,
+    "violations": []
+  },
+  "unit_economics": {
+    "modeled_do_nothing_exposure_usd": 379530.0,
+    "modeled_selected_net_value_usd": 279577.0,
+    "modeled_exposure_remaining_usd": 37953.0,
+    "cash_released_is_not_revenue": true
+  },
+  "production_control": {
+    "auto_execute": false,
+    "required_gates": [
+      "planner approval",
+      "supplier confirmation",
+      "quality approval",
+      "finance approval",
+      "ERP reconciliation"
+    ]
+  },
+  "claim_boundary": [
+    "No live SAP, Oracle, Dynamics, Odoo, supplier, factory or logistics system was called",
+    "Demand, inventory, lead time, costs, service levels and disruption are synthetic inputs",
+    "No physical production, purchasing or safety-critical action is authorized",
+    "Modeled value is not realized savings, revenue or working-capital release"
+  ],
+  "receipt_sha256": "02ed5fc02e8fb4314e6535bc7adac9fd20f75a1a8ad851de4af632fb81b9cdde"
+}

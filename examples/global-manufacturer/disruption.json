@@ -1,0 +1,23 @@
+{
+  "scenario": "Global manufacturer supplier-delay and inventory optimization digital twin",
+  "demand_history": [920, 960, 1010, 1080, 950, 990, 1050, 1120, 980, 1030, 1100, 1190, 1040, 1090, 1160, 1260],
+  "annual_holding_rate": 0.24,
+  "products": [
+    {"name": "industrial-controller", "available_units": 420, "committed_units": 800, "price_usd": 1800, "unit_cost_usd": 920, "gross_margin_pct": 0.42, "late_penalty_usd": 90},
+    {"name": "edge-gateway", "available_units": 600, "committed_units": 750, "price_usd": 900, "unit_cost_usd": 480, "gross_margin_pct": 0.38, "late_penalty_usd": 45},
+    {"name": "sensor-hub", "available_units": 1200, "committed_units": 1100, "price_usd": 320, "unit_cost_usd": 170, "gross_margin_pct": 0.35, "late_penalty_usd": 16}
+  ],
+  "bill_of_materials": [
+    {"component": "chip-x7", "product": "industrial-controller"},
+    {"component": "chip-x7", "product": "edge-gateway"},
+    {"component": "sensor-board", "product": "sensor-hub"}
+  ],
+  "disruption": {"material": "chip-x7", "delay_days": 14, "supplier": "supplier-tier-1-a"},
+  "constraints": {"max_incremental_cash_usd": 300000, "min_service_level_pct": 92},
+  "candidate_actions": [
+    {"name": "do-nothing", "incremental_cost_usd": 0, "cash_required_usd": 0, "service_level_pct": 62, "exposure_reduction_pct": 0, "quality_approved": true},
+    {"name": "expedite-primary-supplier", "incremental_cost_usd": 85000, "cash_required_usd": 160000, "service_level_pct": 96, "exposure_reduction_pct": 0.82, "quality_approved": true},
+    {"name": "approved-alternate-plus-reallocation", "incremental_cost_usd": 62000, "cash_required_usd": 210000, "service_level_pct": 97, "exposure_reduction_pct": 0.9, "quality_approved": true},
+    {"name": "unapproved-component-substitution", "incremental_cost_usd": 22000, "cash_required_usd": 100000, "service_level_pct": 99, "exposure_reduction_pct": 0.96, "quality_approved": false}
+  ]
+}
